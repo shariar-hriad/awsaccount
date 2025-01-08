@@ -1,10 +1,12 @@
+import Article from '@/components/sections/article'
 import CTA from '@/components/sections/cta'
-import Hero from './_components/hero'
+import Hero from '@/components/sections/hero'
 
 const page = () => {
     return (
         <>
             <Hero />
+            <Article />
             <CTA />
         </>
     )

@@ -2,15 +2,17 @@ import { Button } from '@/components/ui/button'
 
 export default function CTA() {
     return (
-        <section className='py-20 bg-blue-600 text-white'>
-            <div className='container mx-auto px-4 text-center'>
-                <h2 className='text-3xl font-bold mb-4'>
-                    Ready to Start Your AWS Journey?
-                </h2>
-                <p className='text-xl mb-8'>
-                    Get your pre-configured AWS account today and accelerate
-                    your cloud projects.
-                </p>
+        <section className='py-5'>
+            <div className='w-full max-w-5xl flex justify-between gap-10 items-center mx-auto bg-primary px-10 py-5 rounded-lg'>
+                <div className='space-y-2'>
+                    <h2 className='text-3xl font-bold text-white'>
+                        Ready to Start Your AWS Journey?
+                    </h2>
+                    <p className='text-xl text-muted'>
+                        Get your pre-configured AWS account today and accelerate
+                        your cloud projects.
+                    </p>
+                </div>
                 <Button size='lg' variant='destructive'>
                     Buy Your AWS Account Now
                 </Button>
