@@ -116,6 +116,13 @@ export default function EditProductForm({ product }: { product: IProduct }) {
         }))
     }
 
+    const handleRemoveVariation = (index: number) => {
+        const updatedVariations = formData.variations.filter(
+            (_, i) => i !== index
+        )
+        setFormData((prev) => ({ ...prev, variations: updatedVariations }))
+    }
+
     const handleKeywordsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const keywordsArray = e.target.value
             .split(',')
@@ -260,6 +267,13 @@ export default function EditProductForm({ product }: { product: IProduct }) {
                                     placeholder='Credits'
                                     className='w-24'
                                 />
+                                <Button
+                                    type='button'
+                                    onClick={() => handleRemoveVariation(index)}
+                                    className='bg-red-500 hover:bg-red-600 text-white'
+                                >
+                                    Remove
+                                </Button>
                             </div>
                         ))}
                         <Button
@@ -301,6 +315,7 @@ export default function EditProductForm({ product }: { product: IProduct }) {
                             <MediaUploader onUpload={handleImageUpload} />
                         </div>
                     </div>
+
                     <div className='space-y-2'>
                         <Label htmlFor='description'>Description</Label>
                         <Editor

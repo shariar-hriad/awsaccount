@@ -15,7 +15,7 @@ export interface ICartStore {
         selectedVariant: IProductVariation,
         quantity?: number
     ) => void
-    removeItem: (productId: string) => void
+    removeItem: (productId: string, selectedVariant: string) => void
     updateQuantity: (productId: string, selectedVariant: string) => void
     decreaseQuantity: (productId: string, selectedVariant: string) => void
     clearCart: () => void
@@ -117,19 +117,23 @@ export const useCartStore = create<ICartStore>()(
                         return { items: updatedItems, total: updatedTotal }
                     })
                 },
-                removeItem: (productId) =>
-                    set((state) => ({
-                        items: state.items.filter(
-                            (item) => item._id !== productId
-                        ),
-                        total: state.items
-                            .filter((item) => item._id !== productId)
-                            .reduce(
-                                (sum, item) =>
-                                    sum + item.quantity * Number(item.price),
-                                0
-                            ),
-                    })),
+                removeItem: (productId, selectedVariant) =>
+                    set((state) => {
+                        const updatedItems = state.items.filter(
+                            (item) =>
+                                !(
+                                    item._id === productId &&
+                                    item.variant === selectedVariant
+                                )
+                        )
+
+                        const updatedTotal = updatedItems.reduce(
+                            (sum, item) => sum + item.quantity * item.price,
+                            0
+                        )
+
+                        return { items: updatedItems, total: updatedTotal }
+                    }),
                 clearCart: () => set({ items: [], total: 0 }),
             }),
             {

@@ -18,7 +18,7 @@ const ProductAccordion: FC<ProductAccordionProps> = ({ description }) => {
                 <AccordionTrigger>Description</AccordionTrigger>
                 <AccordionContent>
                     <div
-                        className='prose dark:prose-invert'
+                        className='prose dark:prose-invert max-w-full'
                         dangerouslySetInnerHTML={{ __html: description }}
                     />
                 </AccordionContent>

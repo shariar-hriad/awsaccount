@@ -151,6 +151,13 @@ export default function CreateProductForm() {
         }))
     }
 
+    const handleRemoveVariation = (index: number) => {
+        const updatedVariations = formData.variations.filter(
+            (_, i) => i !== index
+        )
+        setFormData((prev) => ({ ...prev, variations: updatedVariations }))
+    }
+
     const handleKeywordsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const keywordsArray = e.target.value
             .split(',')
@@ -183,22 +190,8 @@ export default function CreateProductForm() {
             </CardHeader>
             <CardContent>
                 <form onSubmit={handleSubmit} className='space-y-4'>
+                    {/* Title and Slug */}
                     <div className='grid grid-cols-2 gap-4'>
-                        <div className='space-y-2'>
-                            <Label htmlFor='slug'>Slug</Label>
-                            <Input
-                                id='slug'
-                                name='slug'
-                                value={formData.slug}
-                                onChange={handleInputChange}
-                                placeholder='macbook-pro-m1'
-                            />
-                            {errors.slug && (
-                                <p className='text-sm text-red-500'>
-                                    {errors.slug}
-                                </p>
-                            )}
-                        </div>
                         <div className='space-y-2'>
                             <Label htmlFor='title'>Title</Label>
                             <Input
@@ -214,7 +207,23 @@ export default function CreateProductForm() {
                                 </p>
                             )}
                         </div>
+                        <div className='space-y-2'>
+                            <Label htmlFor='slug'>Slug</Label>
+                            <Input
+                                id='slug'
+                                name='slug'
+                                value={formData.slug}
+                                onChange={handleInputChange}
+                                placeholder='macbook-pro-m1'
+                            />
+                            {errors.slug && (
+                                <p className='text-sm text-red-500'>
+                                    {errors.slug}
+                                </p>
+                            )}
+                        </div>
                     </div>
+
                     {/* Price Range & Category */}
                     <div className='grid grid-cols-2 gap-4'>
                         <div className='flex gap-2 items-center'>
@@ -265,9 +274,10 @@ export default function CreateProductForm() {
                             )}
                         </div>
                     </div>
+
                     {/* Product Variation */}
                     <div className='space-y-2'>
-                        <Label>Variations</Label>
+                        <Label className='block'>Variations</Label>
                         {formData.variations.map((variation, index) => (
                             <div key={index} className='flex space-x-2 mt-2'>
                                 <Input
@@ -296,6 +306,14 @@ export default function CreateProductForm() {
                                     placeholder='Credits'
                                     className='w-24'
                                 />
+
+                                <Button
+                                    type='button'
+                                    onClick={() => handleRemoveVariation(index)}
+                                    className='bg-red-500 hover:bg-red-600 text-white'
+                                >
+                                    Remove
+                                </Button>
                             </div>
                         ))}
                         <Button
@@ -337,6 +355,7 @@ export default function CreateProductForm() {
                             <MediaUploader onUpload={handleImageUpload} />
                         </div>
                     </div>
+
                     {/* Description */}
                     <div className='space-y-2'>
                         <Label htmlFor='description'>Description</Label>

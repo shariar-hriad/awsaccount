@@ -63,7 +63,9 @@ const CartItemCard = ({ product }: { product: CartItem }) => {
             <Button
                 variant='outline'
                 className='w-full'
-                onClick={() => removeItem(product._id as string)}
+                onClick={() =>
+                    removeItem(product._id as string, product.variant)
+                }
             >
                 <X className='h-4 w-4 mr-2' />
                 Remove

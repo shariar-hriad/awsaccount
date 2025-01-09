@@ -25,7 +25,7 @@ const SingleProduct: FC<SingleProductProps> = ({ product }) => {
 
     return (
         <div className='space-y-5'>
-            <div className='grid md:grid-cols-2 gap-8'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
                 {product.image && (
                     <Image
                         src={product.image}
@@ -101,7 +101,7 @@ const SingleProduct: FC<SingleProductProps> = ({ product }) => {
             </div>
             <Separator />
             <div
-                className='prose max-w-none dark:prose-invert'
+                className='prose max-w-full dark:prose-invert'
                 dangerouslySetInnerHTML={{ __html: product.content }}
             />
         </div>
