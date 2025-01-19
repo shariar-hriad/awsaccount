@@ -1,7 +1,7 @@
 'use server'
 
 import { connectDB } from '@/lib/mongodb'
-import { IProduct, Product } from '@/models/product-model'
+import { IProduct, IProductDoc, Product } from '@/models/product-model'
 import { revalidatePath } from 'next/cache'
 
 // Create Product
@@ -30,7 +30,7 @@ export const getProducts = async (
             .limit(limit)
             .sort({ createdAt: -1 })
 
-        const products = JSON.parse(JSON.stringify(data))
+        const products: IProductDoc[] = JSON.parse(JSON.stringify(data))
 
         const totalProducts = await Product.countDocuments()
         const totalPages = Math.ceil(totalProducts / limit)
@@ -38,6 +38,7 @@ export const getProducts = async (
         return { products, totalProducts, totalPages }
     } catch (err) {
         console.log(err)
+        return { products: [], totalProducts: 0, totalPages: 0 }
     }
 }
 

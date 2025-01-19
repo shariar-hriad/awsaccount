@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 
 const page = async () => {
-    const { products } = await getProducts({})
+    const { products } = await getProducts()
 
     return (
         <div className='space-y-5'>
