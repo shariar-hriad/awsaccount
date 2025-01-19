@@ -88,6 +88,10 @@ const data = {
                     title: 'Articles',
                     url: '/dashboard/articles',
                 },
+                {
+                    title: 'Create Article',
+                    url: '/dashboard/articles/create-article',
+                },
             ],
         },
     ],

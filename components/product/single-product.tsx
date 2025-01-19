@@ -75,7 +75,7 @@ const SingleProduct: FC<SingleProductProps> = ({ product }) => {
                         </p>
                     )}
                     {/* add to cart button */}
-                    <div className='flex items-center gap-5'>
+                    <div className='flex flex-wrap items-center gap-5'>
                         <QuantityControl
                             quantity={quantity}
                             setQuantity={setQuantity}

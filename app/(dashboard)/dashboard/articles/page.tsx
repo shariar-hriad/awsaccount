@@ -1,9 +1,11 @@
-import CreateArticleForm from './_components/create-article-form'
+import { getArticle } from '@/app/actions/article/actions'
 
-const page = () => {
+const page = async () => {
+    const articles = await getArticle()
+
     return (
-        <div className='p-5'>
-            <CreateArticleForm />
+        <div className='space-y-5'>
+            
         </div>
     )
 }

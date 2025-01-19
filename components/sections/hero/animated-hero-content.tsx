@@ -27,7 +27,7 @@ export default function AnimatedHeroContent({
     return (
         <div className='flex flex-col items-center'>
             <motion.div
-                className='text-center mb-12 space-y-4'
+                className='mb-12 space-y-4'
                 initial='hidden'
                 animate='visible'
                 variants={textVariants}

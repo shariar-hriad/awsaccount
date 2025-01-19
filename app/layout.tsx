@@ -23,6 +23,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
                             disableTransitionOnChange
                         >
                             {children}
+                            {/* <DisableConsole>{children}</DisableConsole> */}
                             <Toaster position='bottom-center' />
                         </ThemeProvider>
                     </Suspense>

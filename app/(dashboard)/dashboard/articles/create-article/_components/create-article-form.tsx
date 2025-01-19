@@ -1,12 +1,14 @@
 'use client'
 
 const Editor = dynamic(() => import('@/components/editor'), { ssr: false })
+import { createArticle } from '@/app/actions/article/actions'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
+import { toast } from 'sonner'
 
 interface ArticleFormData {
     title: string
@@ -46,13 +48,19 @@ const CreateArticleForm = () => {
         return Object.keys(newErrors).length === 0
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         if (!validateForm()) return
 
         setIsSubmitting(true)
-
-        console.log(formData)
+        try {
+            await createArticle(formData)
+        } catch (error) {
+            toast.error('Failed to create article. Please try again.')
+            console.error('Failed to create article:', error)
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (

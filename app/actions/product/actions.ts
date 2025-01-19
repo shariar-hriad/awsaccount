@@ -13,7 +13,6 @@ export const createProduct = async (product: IProduct) => {
         return JSON.parse(JSON.stringify(newProduct))
     } catch (err) {
         console.log(err)
-        throw new Error((err as Error).message)
     }
 }
 
@@ -39,7 +38,6 @@ export const getProducts = async (
         return { products, totalProducts, totalPages }
     } catch (err) {
         console.log(err)
-        throw new Error((err as Error).message)
     }
 }
 
@@ -52,7 +50,6 @@ export const getProductBySlug = async (slug: string) => {
         return JSON.parse(JSON.stringify(product))
     } catch (err) {
         console.log(err)
-        throw new Error((err as Error).message)
     }
 }
 
@@ -70,7 +67,6 @@ export const updateProductBySlug = async (slug: string, product: IProduct) => {
         return JSON.parse(JSON.stringify(updatedProduct))
     } catch (err) {
         console.log(err)
-        throw new Error((err as Error).message)
     }
 }
 
@@ -82,6 +78,6 @@ export async function deleteProductById(productId: string) {
 
         revalidatePath('/dashboard/products')
     } catch (err) {
-        throw new Error((err as Error).message)
+        console.log(err)
     }
 }

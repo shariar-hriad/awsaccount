@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { CartButton } from '../cart-button'
+import { CartButton } from './cart-button'
 import { ModeToggle } from './mode-toggle'
 
 const headerVariants = {
@@ -17,8 +17,6 @@ const headerVariants = {
     },
 }
 
-// className='sticky border top-2 z-50 w-full rounded-lg max-w-6xl mx-auto border-border/70 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-2 lg:py-4'
-
 export default function Header() {
     return (
         <motion.header
@@ -27,7 +25,7 @@ export default function Header() {
             animate='visible'
             variants={headerVariants}
         >
-            <div className='container flex justify-between gap-1 items-center border p-2 rounded-lg border-border/70 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
+            <div className='container lg:px-10 flex justify-between gap-1 items-center border p-2 rounded-lg border-border/70 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-md'>
                 <Link href='/' className='text-2xl font-bold text-blue-600'>
                     AWSAccountPro
                 </Link>

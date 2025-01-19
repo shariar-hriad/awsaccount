@@ -28,6 +28,8 @@ const authOptions: NextAuthOptions = {
 
                 // Example user fetching logic
                 const user = { id: 1, name: 'User', email: 'user@example.com' }
+                // await connectDB()
+                // const user = await User.find({email}).lean()
 
                 if (username === 'user' && password === 'password') {
                     // If the credentials are valid, return the user object matching `User` type
