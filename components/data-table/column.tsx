@@ -104,8 +104,8 @@ export const columns: ColumnDef<IProductDoc>[] = [
             return (
                 <div className='flex space-x-2'>
                     <span className='max-w-[500px] font-medium flex items-center'>
-                        <DollarSign className='w-4 h-4' /> {priceRange.min} -
-                        <DollarSign className='w-4 h-4' />
+                        <DollarSign className='w-3 h-3' /> {priceRange.min} -
+                        <DollarSign className='w-3 h-3' />
                         {priceRange.max}
                     </span>
                 </div>

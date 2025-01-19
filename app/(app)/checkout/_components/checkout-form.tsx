@@ -1,16 +1,11 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useCartStore } from '@/store/cart'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -29,11 +24,11 @@ const CheckOutForm = () => {
     const [formData, setFormData] = useState<OrderFormData>(initialFormData)
 
     const { items, total } = useCartStore()
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [errors, setErrors] = useState<Partial<OrderFormData>>({})
     const router = useRouter()
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState<string | null>(null)
-    const [formError, setFormError] = useState<Partial<OrderFormData>>({})
 
+    // Handle Input change
     const handleInputChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
@@ -41,27 +36,29 @@ const CheckOutForm = () => {
 
         setFormData((prev) => ({ ...prev, [name]: value }))
         // Clear error when user starts typing
-        if (formError[name as keyof OrderFormData]) {
-            setFormError((prev) => ({ ...prev, [name]: undefined }))
+        if (errors[name as keyof OrderFormData]) {
+            setErrors((prev) => ({ ...prev, [name]: undefined }))
         }
     }
-
+    // Validate Form
     const validateForm = (): boolean => {
         const newErrors: Partial<OrderFormData> = {}
 
         if (!formData.firstName) newErrors.firstName = 'First name is required'
         if (!formData.lastName) newErrors.lastName = 'Last name is required'
         if (!formData.email) newErrors.lastName = 'Email is required'
-        setFormError(newErrors)
+        setErrors(newErrors)
         return Object.keys(newErrors).length === 0
     }
-
+    // Handle submit
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
         if (!validateForm()) return
 
-        setIsLoading(true)
-        setError(null)
+        setIsSubmitting(true)
+        localStorage.setItem('user_order_info', JSON.stringify(formData))
+        setIsSubmitting(false)
+        router.push('/payment')
     }
 
     return (
@@ -89,9 +86,9 @@ const CheckOutForm = () => {
                                             onChange={handleInputChange}
                                             required
                                         />
-                                        {formError.firstName && (
+                                        {errors.firstName && (
                                             <p className='text-sm text-red-500'>
-                                                {formError.firstName}
+                                                {errors.firstName}
                                             </p>
                                         )}
                                     </div>
@@ -106,14 +103,14 @@ const CheckOutForm = () => {
                                             onChange={handleInputChange}
                                             required
                                         />
-                                        {formError.lastName && (
+                                        {errors.lastName && (
                                             <p className='text-sm text-red-500'>
-                                                {formError.lastName}
+                                                {errors.lastName}
                                             </p>
                                         )}
                                     </div>
                                 </div>
-                                <div>
+                                <div className='space-y-2'>
                                     <Label htmlFor='email'>Email</Label>
                                     <Input
                                         id='email'
@@ -122,15 +119,15 @@ const CheckOutForm = () => {
                                         onChange={handleInputChange}
                                         required
                                     />
-                                    {formError.email && (
+                                    {errors.email && (
                                         <p className='text-sm text-red-500'>
-                                            {formError.email}
+                                            {errors.email}
                                         </p>
                                     )}
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div className='space-y-4'>
                             <h3 className='text-lg font-semibold mb-4'>
                                 Order Summary
                             </h3>
@@ -160,22 +157,44 @@ const CheckOutForm = () => {
                                     </div>
                                 </div>
                             </div>
+                            <div className='p-4 rounded-md bg-gray-100 flex justify-between items-center gap-2'>
+                                <p>
+                                    <b>USDT, BTC, ETH, Binance Pay</b>
+                                </p>
+                                <div className='flex items-center gap-1'>
+                                    <Image
+                                        src='/payment-method/eth.png'
+                                        alt='Etherum'
+                                        width={40}
+                                        height={40}
+                                    />
+                                    <Image
+                                        src='/payment-method/bitcoin.png'
+                                        alt='Etherum'
+                                        width={40}
+                                        height={40}
+                                    />
+                                    <Image
+                                        src='/payment-method/usdt.png'
+                                        alt='Etherum'
+                                        width={40}
+                                        height={40}
+                                    />
+                                    <Image
+                                        src='/payment-method/binance-pay.png'
+                                        alt='Etherum'
+                                        width={140}
+                                        height={140}
+                                    />
+                                </div>
+                            </div>
+                            <Button type='submit' disabled={isSubmitting}>
+                                {isSubmitting
+                                    ? 'Submitting...'
+                                    : 'Proceed to Checkout'}
+                            </Button>
                         </div>
                     </div>
-                    {error && (
-                        <div className='text-red-500 text-sm mt-2' role='alert'>
-                            {error}
-                        </div>
-                    )}
-                    <CardFooter className='px-0'>
-                        <Button
-                            type='submit'
-                            className='w-full'
-                            disabled={isLoading}
-                        >
-                            {isLoading ? 'Processing...' : 'Proceed to payment'}
-                        </Button>
-                    </CardFooter>
                 </form>
             </CardContent>
         </Card>

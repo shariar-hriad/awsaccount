@@ -6,43 +6,8 @@ import { ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 import CartItemCard from './_components/cart-item'
 
-const fakeRequestBody = {
-    env: {
-        terminalType: 'APP',
-    },
-    merchantTradeNo: '9825382937292',
-    orderAmount: 25.17,
-    currency: 'USDT',
-    description: 'very good Ice Cream',
-    goodsDetails: [
-        {
-            goodsType: '01',
-            goodsCategory: 'D000',
-            referenceGoodsId: '7876763A3B',
-            goodsName: 'Ice Cream',
-            goodsDetail: 'Greentea ice cream cone',
-        },
-    ],
-}
-
 const Page = () => {
     const { items, total } = useCartStore((state) => state)
-
-    const handlePayment = async () => {
-        try {
-            const response = await fetch('/api/binance-pay', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(fakeRequestBody),
-            })
-            const result = await response.json()
-            console.log(result)
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     return (
         <section className='py-20'>

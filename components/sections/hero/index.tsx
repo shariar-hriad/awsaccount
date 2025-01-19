@@ -10,12 +10,12 @@ export default async function Hero() {
     return (
         <section className='py-8 lg:py-20'>
             <div className='container'>
-                {products ? (
+                {products.length >= 1 ? (
                     <div className='max-w-4xl mx-auto'>
                         <AnimatedHeroContent products={products} />
                     </div>
                 ) : (
-                    <p>No content found</p>
+                    <p>No Data found!</p>
                 )}
             </div>
         </section>

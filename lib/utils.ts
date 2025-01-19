@@ -46,3 +46,10 @@ export function timeAgo(isoTimestamp: string): string {
     const differenceInYears = Math.floor(differenceInMonths / 12)
     return `${differenceInYears} years ago`
 }
+
+export const generateOrderNumber = (): string => {
+    const timestamp = Date.now().toString() // Current timestamp in milliseconds (13 digits)
+    const randomNumber = Math.floor(Math.random() * 10 ** 19).toString() // Random number (up to 19 digits)
+    const orderNumber = (timestamp + randomNumber).slice(0, 32) // Ensure it's exactly 32 digits
+    return orderNumber
+}

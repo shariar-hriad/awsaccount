@@ -47,17 +47,6 @@ export async function POST(req: NextRequest) {
             .digest('hex')
             .toUpperCase()
 
-        console.log('Nonce :', nonce.length)
-        console.log('Payload String :', payloadStr)
-        console.log('Headers being sent:', {
-            'Content-Type': 'application/json',
-            'BinancePay-Timestamp': timestamp.toString(),
-            'BinancePay-Nonce': nonce,
-            'BinancePay-Certificate-SN': API_KEY,
-            'BinancePay-Signature': signature,
-        })
-        console.log('Request Body :', JSON.stringify(requestBody))
-
         const response = await fetch(
             `${BASE_URL}/binancepay/openapi/v3/order`,
             {

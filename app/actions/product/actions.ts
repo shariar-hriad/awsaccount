@@ -63,6 +63,7 @@ export const updateProductBySlug = async (slug: string, product: IProduct) => {
             product,
             { new: true }
         )
+        revalidatePath('/')
         revalidatePath('/dashboard/products')
         revalidatePath(`/dashboard/products/edit-product/${slug}`)
         return JSON.parse(JSON.stringify(updatedProduct))
@@ -77,6 +78,7 @@ export async function deleteProductById(productId: string) {
         await connectDB()
         await Product.findByIdAndDelete(productId)
 
+        revalidatePath('/')
         revalidatePath('/dashboard/products')
     } catch (err) {
         console.log(err)

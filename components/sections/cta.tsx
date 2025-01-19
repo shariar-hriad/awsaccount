@@ -4,7 +4,7 @@ export default function CTA() {
     return (
         <section className='py-5 px-2'>
             <div className='w-full max-w-5xl flex flex-col lg:flex-row justify-between gap-10 items-center mx-auto bg-primary px-10 py-5 rounded-lg'>
-                <div className='space-y-2'>
+                <div className='space-y-2 text-white'>
                     <h2 className='text-3xl font-bold'>
                         Ready to Start Your AWS Journey?
                     </h2>
