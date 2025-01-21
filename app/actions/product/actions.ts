@@ -10,6 +10,7 @@ export const createProduct = async (product: IProduct) => {
         await connectDB()
         const newProduct = await Product.create(product)
 
+        revalidatePath('/')
         return JSON.parse(JSON.stringify(newProduct))
     } catch (err) {
         console.log(err)
