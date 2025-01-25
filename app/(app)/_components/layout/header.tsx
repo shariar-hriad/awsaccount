@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { CartButton } from './cart-button'
 import { ModeToggle } from './mode-toggle'
+import SocialMedia from './social-media'
 
 const headerVariants = {
     hidden: { y: -100 },
@@ -30,6 +31,7 @@ export default function Header() {
                     AWSAccountPro
                 </Link>
                 <div className='flex gap-2 items-center'>
+                    <SocialMedia />
                     <ModeToggle />
                     <CartButton />
                 </div>

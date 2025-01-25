@@ -9,7 +9,7 @@ export function CartButton() {
     const { items } = useCartStore((state) => state)
 
     return (
-        <Button className='relative' size='icon' variant='ghost' asChild>
+        <Button className='relative' size='icon' variant='outline' asChild>
             <Link href='/cart'>
                 <ShoppingCart className='w-6 h-6' />
                 {items.length > 0 && (
