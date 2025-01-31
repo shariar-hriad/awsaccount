@@ -13,8 +13,8 @@ const SocialMedia = () => {
                     <Image
                         src='/icon/skype.svg'
                         alt='skype'
-                        width={30}
-                        height={30}
+                        width={20}
+                        height={20}
                     />
                 </Link>
             </Button>
@@ -27,8 +27,8 @@ const SocialMedia = () => {
                     <Image
                         src='/icon/whatsapp.svg'
                         alt='skype'
-                        width={30}
-                        height={30}
+                        width={20}
+                        height={20}
                     />
                 </Link>
             </Button>

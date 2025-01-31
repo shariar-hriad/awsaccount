@@ -19,17 +19,17 @@ function generateNonce(length: number = 32): string {
     return nonce
 }
 
-interface OrderRequest {
-    merchantTradeNo: string
-    totalFee: number
-    currency: string
-    goods: {
-        goodsType: string
-        goodsCategory: string
-        referenceGoodsId: string
-        goodsName: string
-    }
-}
+// interface OrderRequest {
+//     merchantTradeNo: string
+//     totalFee: number
+//     currency: string
+//     goods: {
+//         goodsType: string
+//         goodsCategory: string
+//         referenceGoodsId: string
+//         goodsName: string
+//     }
+// }
 
 export async function POST(req: NextRequest) {
     try {

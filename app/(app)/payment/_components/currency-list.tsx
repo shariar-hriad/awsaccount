@@ -27,7 +27,7 @@ const CurrencyList = () => {
     return (
         <div className='space-y-2'>
             <button
-                onClick={() => handleNavigation('usdt')}
+                onClick={() => handleNavigation('USDT')}
                 className='border w-full text-left p-4 rounded-md flex items-center gap-5 hover:border-green-500 hover:bg-green-50 transition-colors duration-300'
             >
                 <div>

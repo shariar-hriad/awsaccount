@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
 import { CartButton } from './cart-button'
 import { ModeToggle } from './mode-toggle'
@@ -28,7 +29,12 @@ export default function Header() {
         >
             <div className='container lg:px-10 flex justify-between gap-1 items-center border p-2 rounded-lg border-border/70 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-md'>
                 <Link href='/' className='text-2xl font-bold text-blue-600'>
-                    AWSAccountPro
+                    <Image
+                        src='/logo.svg'
+                        alt='awsbulk'
+                        width={70}
+                        height={40}
+                    />
                 </Link>
                 <div className='flex gap-2 items-center'>
                     <SocialMedia />

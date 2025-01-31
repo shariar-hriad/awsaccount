@@ -102,7 +102,7 @@ const Page = ({ params }: { params: { currency: string } }) => {
             merchantId: process.env.BINANCE_MERCHANT_ID!,
             merchantTradeNo: generateOrderNumber(),
             orderAmount: 250,
-            currency: 'usd',
+            currency: 'USDT',
             description: 'very good Ice Cream',
             goodsDetails: [
                 {
