@@ -1,4 +1,3 @@
-import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import { Open_Sans } from 'next/font/google'
 import { ReactNode, Suspense } from 'react'
@@ -16,16 +15,16 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
             <html lang='en' suppressHydrationWarning>
                 <body className={`${openSans.variable} antialiased`}>
                     <Suspense fallback={<p>Loading...</p>}>
-                        <ThemeProvider
+                        {/* <ThemeProvider
                             attribute='class'
                             defaultTheme='system'
                             enableSystem
                             disableTransitionOnChange
-                        >
-                            {children}
-                            {/* <DisableConsole>{children}</DisableConsole> */}
-                            <Toaster position='bottom-center' />
-                        </ThemeProvider>
+                        > */}
+                        {children}
+                        {/* <DisableConsole>{children}</DisableConsole> */}
+                        <Toaster position='bottom-center' />
+                        {/* </ThemeProvider> */}
                     </Suspense>
                 </body>
             </html>

@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CartButton } from './cart-button'
-import { ModeToggle } from './mode-toggle'
 import SocialMedia from './social-media'
 
 const headerVariants = {
@@ -38,7 +37,7 @@ export default function Header() {
                 </Link>
                 <div className='flex gap-2 items-center'>
                     <SocialMedia />
-                    <ModeToggle />
+                    {/* <ModeToggle /> */}
                     <CartButton />
                 </div>
             </div>
