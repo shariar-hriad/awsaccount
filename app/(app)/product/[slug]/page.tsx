@@ -55,7 +55,7 @@ export async function generateMetadata(
 }
 
 export default async function ProductPage({ params }: Props) {
-    const product: IProductDoc = await getProductBySlug(params.slug)
+    const product: IProductDoc = await getProductBySlug((await params).slug)
 
     return (
         <section className='py-4 lg:py-8'>
