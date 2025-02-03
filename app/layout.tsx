@@ -5,7 +5,7 @@ import { ReactNode, Suspense } from 'react'
 import './globals.css'
 
 const openSans = Open_Sans({
-    variable: '--font-geist-sans',
+    variable: '--font-open-sans',
     subsets: ['latin'],
 })
 

@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -16,6 +17,8 @@ interface ArticleFormData {
 }
 
 const CreateArticleForm = () => {
+    const router = useRouter()
+
     const initialFormData: ArticleFormData = {
         title: '',
         content: '',
@@ -55,6 +58,9 @@ const CreateArticleForm = () => {
         setIsSubmitting(true)
         try {
             await createArticle(formData)
+            toast.success('Article created successfully')
+            setFormData(initialFormData)
+            router.push('/dashboard/articles')
         } catch (error) {
             toast.error('Failed to create article. Please try again.')
             console.error('Failed to create article:', error)

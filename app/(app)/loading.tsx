@@ -14,7 +14,7 @@ export default function SpinningCircleLoader({
     message,
 }: SpinningCircleLoaderProps) {
     return (
-        <div className='absolute z-50 top-0 bottom-0 right-0 left-0 w-full flex items-center justify-center bg-background'>
+        <div className='w-full h-[50vh] flex items-center justify-center bg-background'>
             <div className={`flex flex-col items-center ${className}`}>
                 <div
                     className='inline-block'

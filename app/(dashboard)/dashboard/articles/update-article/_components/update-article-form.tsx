@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { IArticleDoc } from '@/models/article-model'
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
@@ -15,10 +16,10 @@ interface ArticleFormData {
     content: string
 }
 
-const UpdateArticleForm = () => {
+const UpdateArticleForm = ({ article }: { article: IArticleDoc }) => {
     const initialFormData: ArticleFormData = {
-        title: '',
-        content: '',
+        title: article.title,
+        content: article.content,
     }
 
     const [errors, setErrors] = useState<Partial<ArticleFormData>>({})
@@ -103,7 +104,7 @@ const UpdateArticleForm = () => {
                     </div>
 
                     <Button type='submit' disabled={isSubmitting}>
-                        {isSubmitting ? 'Submitting...' : 'Create Article'}
+                        {isSubmitting ? 'Submitting...' : 'Update Article'}
                     </Button>
                 </form>
             </CardContent>
