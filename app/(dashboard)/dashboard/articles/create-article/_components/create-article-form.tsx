@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Loader2 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
@@ -109,7 +110,14 @@ const CreateArticleForm = () => {
                     </div>
 
                     <Button type='submit' disabled={isSubmitting}>
-                        {isSubmitting ? 'Submitting...' : 'Create Article'}
+                        {isSubmitting ? (
+                            <>
+                                <Loader2 className='animate-spin' />
+                                Please wait
+                            </>
+                        ) : (
+                            'Create Article'
+                        )}
                     </Button>
                 </form>
             </CardContent>

@@ -154,6 +154,7 @@ export default function EditProductForm({ product }: { product: IProduct }) {
             </CardHeader>
             <CardContent>
                 <form onSubmit={handleSubmit} className='space-y-4'>
+                    {/* Title and Slug */}
                     <div className='grid grid-cols-2 gap-4'>
                         <div>
                             <Label htmlFor='slug'>Slug</Label>
@@ -187,6 +188,7 @@ export default function EditProductForm({ product }: { product: IProduct }) {
                         </div>
                     </div>
 
+                    {/* Price Range */}
                     <div className='grid grid-cols-2 gap-4'>
                         <div className='flex gap-2 items-center'>
                             <div className='space-y-2 flex-grow'>
@@ -237,8 +239,10 @@ export default function EditProductForm({ product }: { product: IProduct }) {
                         </div>
                     </div>
 
+                    {/* Variations */}
                     <div className='space-y-2'>
                         <Label>Variations</Label>
+
                         {formData.variations.map((variation, index) => (
                             <div key={index} className='flex space-x-2 mt-2'>
                                 <Input
@@ -292,9 +296,11 @@ export default function EditProductForm({ product }: { product: IProduct }) {
                         )}
                     </div>
 
+                    {/* Excerpt */}
                     <div className='grid grid-cols-2 gap-4'>
                         <div className='space-y-2'>
                             <Label htmlFor='excerpt'>Excerpt</Label>
+
                             <Textarea
                                 id='excerpt'
                                 name='excerpt'
@@ -316,6 +322,7 @@ export default function EditProductForm({ product }: { product: IProduct }) {
                         </div>
                     </div>
 
+                    {/* Description */}
                     <div className='space-y-2'>
                         <Label htmlFor='description'>Description</Label>
                         <Editor
@@ -347,8 +354,10 @@ export default function EditProductForm({ product }: { product: IProduct }) {
                         )}
                     </div>
 
+                    {/* Keywords */}
                     <div className='space-y-2'>
                         <Label htmlFor='keywords'>Keywords</Label>
+
                         <Input
                             id='keywords'
                             name='keywords'
@@ -363,6 +372,7 @@ export default function EditProductForm({ product }: { product: IProduct }) {
                         )}
                     </div>
 
+                    {/* Submit Button */}
                     <Button type='submit' disabled={isSubmitting}>
                         {isSubmitting ? 'Submitting...' : 'Update Product'}
                     </Button>

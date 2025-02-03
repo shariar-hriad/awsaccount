@@ -12,7 +12,7 @@ const page = async () => {
         <div className='space-y-5'>
             <Link
                 className={buttonVariants()}
-                href='/admin/products/create-product'
+                href='/dashboard/products/create-product'
             >
                 Create Product
             </Link>
