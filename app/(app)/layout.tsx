@@ -7,6 +7,9 @@ import Header from './_components/layout/header'
 export const metadata: Metadata = {
     title: 'AWSBULK',
     description: 'Buy AWS account from here',
+    verification: {
+        google: 'zwGqBm3o77HdJ9fmECHztUSQd48EuiYXAwHm4gdfAR8',
+    },
 }
 
 type AppLayoutProps = {
