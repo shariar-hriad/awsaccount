@@ -1,3 +1,5 @@
+'use server'
+
 import { connectDB } from '@/lib/mongodb'
 import { IOrder, Order } from '@/models/order-model'
 import { revalidatePath } from 'next/cache'

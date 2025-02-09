@@ -75,7 +75,7 @@ const data = {
             items: [
                 {
                     title: 'Order History',
-                    url: '/order-history',
+                    url: '/dashboard/orders',
                 },
             ],
         },
