@@ -40,6 +40,7 @@ const CheckOutForm = () => {
             setErrors((prev) => ({ ...prev, [name]: undefined }))
         }
     }
+
     // Validate Form
     const validateForm = (): boolean => {
         const newErrors: Partial<OrderFormData> = {}
@@ -50,6 +51,7 @@ const CheckOutForm = () => {
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
     }
+
     // Handle submit
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
@@ -57,7 +59,7 @@ const CheckOutForm = () => {
 
         setIsSubmitting(true)
         await createOrder(formData)
-        localStorage.setItem('user_order_info', JSON.stringify(formData))
+        // localStorage.setItem('user_order_info', JSON.stringify(formData))
         setIsSubmitting(false)
         router.push('/payment')
     }
