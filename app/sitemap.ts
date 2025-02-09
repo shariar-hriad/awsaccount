@@ -1,10 +1,11 @@
-import { Product } from '@/models/product-model'
 import type { MetadataRoute } from 'next'
+
+import { getProducts } from './actions/product/actions'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://awsbulk.com'
 
-    const products = await Product.find({})
+    const { products } = await getProducts({})
 
     const productUrls = products.map((product) => ({
         url: `${baseUrl}/product/${product.slug}`,

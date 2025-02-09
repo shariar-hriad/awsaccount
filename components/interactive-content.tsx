@@ -16,11 +16,12 @@ const InteractiveContent = ({ text, limit }: InteractiveContentProps) => {
 
     return (
         <p className='mt-4 sm:text-xl/relaxed'>
-            {isExpanded ? text : `${text?.substring(0, limit)}... `}
-            {!isExpanded && (
+            {isExpanded ? text : `${text?.substring(0, limit)}...`}
+
+            {!isExpanded && text && text.length <= limit && (
                 <button
                     onClick={toggleExpanded}
-                    className='text-blue-500 hover:text-blue-700 inline'
+                    className='text-blue-500 hover:text-blue-700 inline-block'
                 >
                     See More
                 </button>

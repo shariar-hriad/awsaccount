@@ -1,6 +1,5 @@
 'use client'
 
-import InteractiveContent from '@/components/interactive-content'
 import { Button } from '@/components/ui/button'
 import { IProduct } from '@/models/product-model'
 import { motion } from 'framer-motion'
@@ -36,7 +35,8 @@ export default function AnimatedHeroContent({
                 <h1 className='text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500'>
                     {products[0].title}
                 </h1>
-                <InteractiveContent text={products[0].excerpt} limit={300} />
+                <p className='text-lg'>{products[0].excerpt}</p>
+                {/* <InteractiveContent text={products[0].excerpt} limit={300} /> */}
 
                 <div className='space-x-2'>
                     <Link href={`/product/${products[0].slug}`}>
