@@ -65,6 +65,7 @@ export const updateProductBySlug = async (slug: string, product: IProduct) => {
             { new: true }
         )
         revalidatePath('/')
+        revalidatePath('/product')
         revalidatePath('/dashboard/products')
         revalidatePath(`/dashboard/products/edit-product/${slug}`)
         return JSON.parse(JSON.stringify(updatedProduct))

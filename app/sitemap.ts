@@ -1,6 +1,18 @@
+import { Product } from '@/models/product-model'
 import type { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const baseUrl = 'https://awsbulk.com'
+
+    const products = await Product.find({})
+
+    const productUrls = products.map((product) => ({
+        url: `${baseUrl}/product/${product.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+    }))
+
     return [
         {
             url: 'https://awsbulk.com',
@@ -8,11 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 1,
         },
-        {
-            url: 'https://www.awsbulk.com/product/buy-aws-account-100-verified-aws-accounts-for-sale',
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
+        ...productUrls,
     ]
 }

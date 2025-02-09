@@ -1,12 +1,10 @@
 import { model, models, Schema } from 'mongoose'
-import { IProduct } from './product-model'
 
 export interface IOrder {
     firstName: string
     lastName: string
     email: string
-    product: IProduct
-    createdAt?: string
+    createdAt?: Date
 }
 
 export interface IOrderDoc extends IOrder, Document {}
@@ -30,11 +28,6 @@ const OrderSchema = new Schema<IOrder>({
         trim: true,
         unique: true,
         match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-    },
-    product: {
-        type: String,
-        required: true,
-        trim: true,
     },
     createdAt: {
         type: Date,

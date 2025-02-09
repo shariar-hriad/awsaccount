@@ -1,11 +1,11 @@
 'use client'
 
+import { createOrder } from '@/app/actions/order/actions'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useCartStore } from '@/store/cart'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -56,6 +56,7 @@ const CheckOutForm = () => {
         if (!validateForm()) return
 
         setIsSubmitting(true)
+        await createOrder(formData)
         localStorage.setItem('user_order_info', JSON.stringify(formData))
         setIsSubmitting(false)
         router.push('/payment')
@@ -157,7 +158,7 @@ const CheckOutForm = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='p-4 rounded-md bg-gray-100 flex justify-between items-center gap-2'>
+                            {/* <div className='p-4 rounded-md bg-gray-100 flex justify-between items-center gap-2'>
                                 <p>
                                     <b>USDT, BTC, ETH, Binance Pay</b>
                                 </p>
@@ -187,7 +188,7 @@ const CheckOutForm = () => {
                                         height={140}
                                     />
                                 </div>
-                            </div>
+                            </div> */}
                             <Button type='submit' disabled={isSubmitting}>
                                 {isSubmitting
                                     ? 'Submitting...'

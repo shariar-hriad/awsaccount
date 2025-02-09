@@ -27,7 +27,7 @@ export default function AnimatedHeroContent({
     return (
         <div className='flex flex-col items-center'>
             <motion.div
-                className='mb-12 space-y-4'
+                className='mb-12 space-y-4 text-center'
                 initial='hidden'
                 animate='visible'
                 variants={textVariants}
@@ -39,10 +39,9 @@ export default function AnimatedHeroContent({
                 <InteractiveContent text={products[0].excerpt} limit={300} />
 
                 <div className='space-x-2'>
-                    <Button size='lg'>Buy Now</Button>
                     <Link href={`/product/${products[0].slug}`}>
                         <Button size='lg' variant='outline'>
-                            See Details
+                            Buy Now
                         </Button>
                     </Link>
                 </div>
