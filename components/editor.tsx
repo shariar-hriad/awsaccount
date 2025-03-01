@@ -13,10 +13,9 @@ const FroalaEditor = dynamic(() => import('react-froala-wysiwyg'), {
 type EditorProps = {
     model: string
     onModelChange: (model: string) => void
-    storageKey: string
 }
 
-const Editor: FC<EditorProps> = ({ model, onModelChange, storageKey }) => {
+const Editor: FC<EditorProps> = ({ model, onModelChange }) => {
     const [editorModel, setEditorModel] = useState(model)
 
     // Save editor content to localStorage whenever it changes
@@ -26,18 +25,7 @@ const Editor: FC<EditorProps> = ({ model, onModelChange, storageKey }) => {
     }
 
     return (
-        <FroalaEditor
-            model={editorModel}
-            onModelChange={handleModelChange}
-            config={{
-                saveInterval: 1000,
-                events: {
-                    'save.before': function (html: string) {
-                        localStorage.setItem(storageKey, html)
-                    },
-                },
-            }}
-        />
+        <FroalaEditor model={editorModel} onModelChange={handleModelChange} />
     )
 }
 

@@ -14,6 +14,7 @@ import { toast } from 'sonner'
 
 interface ArticleFormData {
     title: string
+    content: string
 }
 
 const CreateArticleForm = () => {
@@ -23,6 +24,7 @@ const CreateArticleForm = () => {
 
     const initialFormData: ArticleFormData = {
         title: '',
+        content: '',
     }
 
     const [errors, setErrors] = useState<Partial<ArticleFormData>>({})
@@ -126,7 +128,7 @@ const CreateArticleForm = () => {
                     <div className='space-y-2'>
                         <Label htmlFor='content'>Content</Label>
 
-                        <Editor value={content} onChange={setContent} />
+                        <Editor model={content} onModelChange={setContent} />
 
                         {/* {errors.content && (
                             <p className='text-sm text-red-500'>

@@ -1,13 +1,14 @@
 'use client'
 
 const Editor = dynamic(() => import('@/components/editor'), { ssr: false })
-import { createArticle } from '@/app/actions/article/actions'
+import { updateArticle } from '@/app/actions/article/actions'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { IArticleDoc } from '@/models/article-model'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -21,7 +22,7 @@ const UpdateArticleForm = ({ article }: { article: IArticleDoc }) => {
         title: article.title,
         content: article.content,
     }
-
+    const router = useRouter()
     const [errors, setErrors] = useState<Partial<ArticleFormData>>({})
     const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -55,7 +56,10 @@ const UpdateArticleForm = ({ article }: { article: IArticleDoc }) => {
 
         setIsSubmitting(true)
         try {
-            await createArticle(formData)
+            await updateArticle(article._id as string, formData)
+            toast.success('Successfully created')
+            router.refresh()
+            router.push('/dashboard/articles')
         } catch (error) {
             toast.error('Failed to create article. Please try again.')
             console.error('Failed to create article:', error)
@@ -94,7 +98,6 @@ const UpdateArticleForm = ({ article }: { article: IArticleDoc }) => {
                         <Editor
                             model={formData.content}
                             onModelChange={handleContentChange}
-                            storageKey='article-content'
                         />
                         {errors.content && (
                             <p className='text-sm text-red-500'>

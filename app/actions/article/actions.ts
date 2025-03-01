@@ -1,7 +1,7 @@
 'use server'
 
 import { connectDB } from '@/lib/mongodb'
-import { Article, IArticle, IArticleDoc } from '@/models/article-model'
+import { Article, IArticle } from '@/models/article-model'
 import { revalidatePath } from 'next/cache'
 
 // create article
@@ -42,12 +42,15 @@ export const getArticleById = async (id: string) => {
 }
 
 // update article
-export const updateArticle = async (id: string, article: IArticleDoc) => {
+export const updateArticle = async (id: string, article: IArticle) => {
     try {
         await connectDB()
         const updatedArticle = await Article.findByIdAndUpdate(id, article, {
             new: true,
         })
+
+        revalidatePath('/')
+        revalidatePath('/dashboard/articles')
 
         return JSON.parse(JSON.stringify(updatedArticle))
     } catch (error) {
@@ -61,6 +64,7 @@ export const deleteArticle = async (id: string) => {
         await connectDB()
 
         await Article.findByIdAndDelete(id)
+
         revalidatePath('/dashboard/articles')
         revalidatePath('/')
 
