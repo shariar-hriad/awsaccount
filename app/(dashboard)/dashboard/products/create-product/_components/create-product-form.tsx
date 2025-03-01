@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { generateSlug } from '@/lib/utils'
 import { IProductVariation } from '@/models/product-model'
+import { Trash } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
@@ -48,14 +49,14 @@ export default function CreateProductForm() {
     }
 
     const [formData, setFormData] = useState<ProductFormData>(initialFormData)
-
     const [errors, setErrors] = useState<Partial<ProductFormData>>({})
     const [isSubmitting, setIsSubmitting] = useState(false)
 
+    // useEffect for generating slug from title
     useEffect(() => {
         setFormData((prev) => ({ ...prev, slug: generateSlug(formData.title) }))
     }, [formData.title])
-
+    // handle input change
     const handleInputChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
@@ -77,7 +78,7 @@ export default function CreateProductForm() {
             setErrors((prev) => ({ ...prev, [name]: undefined }))
         }
     }
-
+    // handle variation change
     const handleVariationChange = (
         index: number,
         field: 'amount' | 'credit',
@@ -91,28 +92,28 @@ export default function CreateProductForm() {
         }
         setFormData((prev) => ({ ...prev, variations: newVariations }))
     }
-
+    // handle content change
     const handleContentChange = (content: string) => {
         setFormData((prev) => ({ ...prev, content }))
         if (errors.content) {
             setErrors((prev) => ({ ...prev, content: undefined }))
         }
     }
-
+    // handle image upload
     const handleImageUpload = (url: string) => {
         setFormData((prev) => ({ ...prev, image: url }))
         if (errors.image) {
             setErrors((prev) => ({ ...prev, image: undefined }))
         }
     }
-
+    // handle description change
     const handleDescriptionChange = (description: string) => {
         setFormData((prev) => ({ ...prev, description }))
         if (errors.description) {
             setErrors((prev) => ({ ...prev, description: undefined }))
         }
     }
-
+    // validate form
     const validateForm = (): boolean => {
         const newErrors: Partial<ProductFormData> = {}
 
@@ -143,41 +144,41 @@ export default function CreateProductForm() {
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
     }
-
-    const addVariation = () => {
+    // handle add variation
+    const handleAddVariation = () => {
         setFormData((prev) => ({
             ...prev,
             variations: [...prev.variations, { amount: 0, credit: '' }],
         }))
     }
-
+    // handle remove variation
     const handleRemoveVariation = (index: number) => {
         const updatedVariations = formData.variations.filter(
             (_, i) => i !== index
         )
         setFormData((prev) => ({ ...prev, variations: updatedVariations }))
     }
-
+    // handle keyword change
     const handleKeywordsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const keywordsArray = e.target.value
             .split(',')
             .map((keyword) => keyword.trim())
         setFormData((prev) => ({ ...prev, keywords: keywordsArray }))
     }
-
+    // handle submit
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         if (!validateForm()) return
 
-        setIsSubmitting(true)
         try {
+            setIsSubmitting(true)
             await createProduct(formData)
             toast.success('Product created successfully!')
             setFormData(initialFormData) // Reset form to initial state
             setErrors({}) // Clear any errors
         } catch (error) {
             toast.error('Failed to create product. Please try again.')
-            console.error('Failed to create product:', error)
+            console.error('Failed to create product: ', error)
         } finally {
             setIsSubmitting(false)
         }
@@ -275,61 +276,70 @@ export default function CreateProductForm() {
                         </div>
                     </div>
 
-                    {/* Product Variation */}
+                    {/* Variations */}
                     <div className='space-y-2'>
-                        <Label className='block'>Variations</Label>
-                        {formData.variations.map((variation, index) => (
-                            <div key={index} className='flex space-x-2 mt-2'>
-                                <Input
-                                    type='number'
-                                    value={variation.amount}
-                                    onChange={(e) =>
-                                        handleVariationChange(
-                                            index,
-                                            'amount',
-                                            e.target.value
-                                        )
-                                    }
-                                    placeholder='Price'
-                                    className='w-24'
-                                />
-                                <Input
-                                    type='text'
-                                    value={variation.credit}
-                                    onChange={(e) =>
-                                        handleVariationChange(
-                                            index,
-                                            'credit',
-                                            e.target.value
-                                        )
-                                    }
-                                    placeholder='Credits'
-                                    className='w-24'
-                                />
+                        <Label>Variations</Label>
 
-                                <Button
-                                    type='button'
-                                    onClick={() => handleRemoveVariation(index)}
-                                    className='bg-red-500 hover:bg-red-600 text-white'
+                        <div className='flex flex-wrap gap-4'>
+                            {formData.variations.map((variation, index) => (
+                                <div
+                                    key={index}
+                                    className='flex space-x-2 mt-2'
                                 >
-                                    Remove
-                                </Button>
-                            </div>
-                        ))}
-                        <Button
-                            type='button'
-                            variant='outline'
-                            size='sm'
-                            className='mt-2'
-                            onClick={addVariation}
-                        >
-                            Add Variation
-                        </Button>
-                        {errors.variationsError && (
-                            <p className='text-sm text-red-500'>
-                                {errors.variationsError}
-                            </p>
-                        )}
+                                    <Input
+                                        type='number'
+                                        value={variation.amount}
+                                        onChange={(e) =>
+                                            handleVariationChange(
+                                                index,
+                                                'amount',
+                                                e.target.value
+                                            )
+                                        }
+                                        placeholder='Price'
+                                        className='w-24'
+                                    />
+                                    <Input
+                                        type='text'
+                                        value={variation.credit}
+                                        onChange={(e) =>
+                                            handleVariationChange(
+                                                index,
+                                                'credit',
+                                                e.target.value
+                                            )
+                                        }
+                                        placeholder='Credits'
+                                        className=''
+                                    />
+                                    <Button
+                                        type='button'
+                                        size='icon'
+                                        variant='outline'
+                                        onClick={() =>
+                                            handleRemoveVariation(index)
+                                        }
+                                        className='text-red-500 shrink-0'
+                                    >
+                                        <Trash />
+                                    </Button>
+                                </div>
+                            ))}
+                            <Button
+                                type='button'
+                                variant='outline'
+                                size='sm'
+                                className='mt-2'
+                                onClick={handleAddVariation}
+                            >
+                                Add Variation
+                            </Button>
+                            {errors.variationsError && (
+                                <p className='text-sm text-red-500'>
+                                    {errors.variationsError}
+                                </p>
+                            )}
+                        </div>
                     </div>
 
                     {/* Excerpt & Image */}

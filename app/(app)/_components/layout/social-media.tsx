@@ -19,14 +19,20 @@ const SocialMedia = () => {
                 </Link>
             </Button>
             <Button variant='outline' size='icon' asChild>
-                <Link
-                    href='https://wa.me/+447405603221
-'
-                    target='_blank'
-                >
+                <Link href='https://wa.me/+447405603221' target='_blank'>
                     <Image
                         src='/icon/whatsapp.svg'
                         alt='skype'
+                        width={20}
+                        height={20}
+                    />
+                </Link>
+            </Button>
+            <Button variant='outline' size='icon' asChild>
+                <Link href='https://t.me/awsbulkcom' target='_blank'>
+                    <Image
+                        src='/icon/telegram.png'
+                        alt='telegram'
                         width={20}
                         height={20}
                     />

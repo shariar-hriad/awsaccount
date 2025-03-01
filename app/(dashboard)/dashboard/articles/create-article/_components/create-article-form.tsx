@@ -14,15 +14,15 @@ import { toast } from 'sonner'
 
 interface ArticleFormData {
     title: string
-    content: string
 }
 
 const CreateArticleForm = () => {
+    const [content, setContent] = useState<string>('')
+    // const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter()
 
     const initialFormData: ArticleFormData = {
         title: '',
-        content: '',
     }
 
     const [errors, setErrors] = useState<Partial<ArticleFormData>>({})
@@ -38,9 +38,38 @@ const CreateArticleForm = () => {
         setFormData((prev) => ({ ...prev, [name]: value }))
     }
 
-    const handleContentChange = (content: string) => {
-        setFormData((prev) => ({ ...prev, content }))
-    }
+    // const handleImageUpload = async (
+    //     e: React.ChangeEvent<HTMLInputElement>
+    // ) => {
+    //     const file = e.target.files?.[0]
+    //     if (!file) return
+
+    //     const formData = new FormData()
+    //     formData.append('file', file)
+    //     formData.append('upload_preset', 'awsbulk') // Ensure this matches your Cloudinary upload preset
+
+    //     try {
+    //         setLoading(true)
+    //         const res = await fetch(
+    //             `https://api.cloudinary.com/v1_1/dhqz7sqzh/image/upload`,
+    //             {
+    //                 method: 'POST',
+    //                 body: formData,
+    //             }
+    //         )
+    //         const data = await res.json()
+
+    //         if (data.secure_url) {
+    //             // setPreviewUrl(data.secure_url)
+    //             // onUpload(data.secure_url) // Pass the image URL to the parent component
+    //             console.log(data.secure_url)
+    //         }
+    //     } catch (err) {
+    //         console.error('Image upload failed:', err)
+    //     } finally {
+    //         setLoading(false)
+    //     }
+    // }
 
     const validateForm = (): boolean => {
         const newErrors: Partial<ArticleFormData> = {}
@@ -97,16 +126,13 @@ const CreateArticleForm = () => {
                     <div className='space-y-2'>
                         <Label htmlFor='content'>Content</Label>
 
-                        <Editor
-                            model={formData.content}
-                            onModelChange={handleContentChange}
-                            storageKey='article-content'
-                        />
-                        {errors.content && (
+                        <Editor value={content} onChange={setContent} />
+
+                        {/* {errors.content && (
                             <p className='text-sm text-red-500'>
                                 {errors.content}
                             </p>
-                        )}
+                        )} */}
                     </div>
 
                     <Button type='submit' disabled={isSubmitting}>

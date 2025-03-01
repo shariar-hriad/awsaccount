@@ -1,11 +1,10 @@
 'use client'
 
 import {
-    AudioWaveform,
     Book,
-    Command,
     GalleryVerticalEnd,
     Grid2X2,
+    Settings,
     ShoppingBag,
 } from 'lucide-react'
 import * as React from 'react'
@@ -27,27 +26,10 @@ import Link from 'next/link'
 // This is sample data.
 const data = {
     user: {
-        name: 'shadcn',
+        name: 'Munwar Maruf',
         email: 'm@example.com',
         avatar: '/avatars/shadcn.jpg',
     },
-    teams: [
-        {
-            name: 'Acme Inc',
-            logo: GalleryVerticalEnd,
-            plan: 'Enterprise',
-        },
-        {
-            name: 'Acme Corp.',
-            logo: AudioWaveform,
-            plan: 'Startup',
-        },
-        {
-            name: 'Evil Corp.',
-            logo: Command,
-            plan: 'Free',
-        },
-    ],
     navMain: [
         {
             title: 'Product',
@@ -94,6 +76,21 @@ const data = {
                 },
             ],
         },
+        {
+            title: 'Faq',
+            url: '#',
+            icon: Settings,
+            items: [
+                {
+                    title: 'Faqs',
+                    url: '/dashboard/faqs',
+                },
+                {
+                    title: 'Create Faq',
+                    url: '/dashboard/faqs/create-faq',
+                },
+            ],
+        },
     ],
 }
 
@@ -110,7 +107,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 </div>
                                 <div className='flex flex-col gap-0.5 leading-none'>
                                     <span className='font-semibold'>
-                                        Site Name
+                                        AWS Bulk
                                     </span>
                                     <span className=''>v1.0.0</span>
                                 </div>

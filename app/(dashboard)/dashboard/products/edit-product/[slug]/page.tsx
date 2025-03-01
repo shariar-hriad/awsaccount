@@ -6,6 +6,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
     const product = await getProductBySlug(params.slug)
 
     if (!product) notFound()
+
     return (
         <div className='p-5'>
             <EditProductForm product={product} />

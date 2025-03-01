@@ -1,11 +1,11 @@
 import { Toaster } from '@/components/ui/sonner'
-import { Open_Sans } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import { ReactNode, Suspense } from 'react'
 
 import './globals.css'
 
-const openSans = Open_Sans({
-    variable: '--font-open-sans',
+const poppins = Poppins({
+    weight: ['300', '400', '500', '600', '700', '800'],
     subsets: ['latin'],
 })
 
@@ -13,7 +13,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
     return (
         <>
             <html lang='en' suppressHydrationWarning>
-                <body className={`${openSans.variable} antialiased`}>
+                <body className={`${poppins.className} antialiased`}>
                     <Suspense fallback={<p>Loading...</p>}>
                         {/* <ThemeProvider
                             attribute='class'

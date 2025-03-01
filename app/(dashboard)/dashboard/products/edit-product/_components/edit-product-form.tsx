@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { generateSlug } from '@/lib/utils'
 import { IProduct } from '@/models/product-model'
+import { Trash } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
@@ -33,7 +34,6 @@ export default function EditProductForm({ product }: { product: IProduct }) {
     }
 
     const [formData, setFormData] = useState<ProductFormData>(initialFormData)
-
     const [errors, setErrors] = useState<Partial<ProductFormData>>({})
     const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -243,57 +243,66 @@ export default function EditProductForm({ product }: { product: IProduct }) {
                     <div className='space-y-2'>
                         <Label>Variations</Label>
 
-                        {formData.variations.map((variation, index) => (
-                            <div key={index} className='flex space-x-2 mt-2'>
-                                <Input
-                                    type='number'
-                                    value={variation.amount}
-                                    onChange={(e) =>
-                                        handleVariationChange(
-                                            index,
-                                            'amount',
-                                            e.target.value
-                                        )
-                                    }
-                                    placeholder='Price'
-                                    className='w-24'
-                                />
-                                <Input
-                                    type='text'
-                                    value={variation.credit}
-                                    onChange={(e) =>
-                                        handleVariationChange(
-                                            index,
-                                            'credit',
-                                            e.target.value
-                                        )
-                                    }
-                                    placeholder='Credits'
-                                    className='w-24'
-                                />
-                                <Button
-                                    type='button'
-                                    onClick={() => handleRemoveVariation(index)}
-                                    className='bg-red-500 hover:bg-red-600 text-white'
+                        <div className='flex flex-wrap gap-4'>
+                            {formData.variations.map((variation, index) => (
+                                <div
+                                    key={index}
+                                    className='flex space-x-2 mt-2'
                                 >
-                                    Remove
-                                </Button>
-                            </div>
-                        ))}
-                        <Button
-                            type='button'
-                            variant='outline'
-                            size='sm'
-                            className='mt-2'
-                            onClick={addVariation}
-                        >
-                            Add Variation
-                        </Button>
-                        {errors.variationsError && (
-                            <p className='text-sm text-red-500'>
-                                {errors.variationsError}
-                            </p>
-                        )}
+                                    <Input
+                                        type='number'
+                                        value={variation.amount}
+                                        onChange={(e) =>
+                                            handleVariationChange(
+                                                index,
+                                                'amount',
+                                                e.target.value
+                                            )
+                                        }
+                                        placeholder='Price'
+                                        className='w-24'
+                                    />
+                                    <Input
+                                        type='text'
+                                        value={variation.credit}
+                                        onChange={(e) =>
+                                            handleVariationChange(
+                                                index,
+                                                'credit',
+                                                e.target.value
+                                            )
+                                        }
+                                        placeholder='Credits'
+                                        className=''
+                                    />
+                                    <Button
+                                        type='button'
+                                        size='icon'
+                                        variant='outline'
+                                        onClick={() =>
+                                            handleRemoveVariation(index)
+                                        }
+                                        className='text-red-500 shrink-0'
+                                    >
+                                        <Trash />
+                                    </Button>
+                                </div>
+                            ))}
+                            <Button
+                                type='button'
+                                variant='outline'
+                                size='sm'
+                                className='mt-2'
+                                onClick={addVariation}
+                            >
+                                Add Variation
+                            </Button>
+                            {errors.variationsError && (
+                                <p className='text-sm text-red-500'>
+                                    {errors.variationsError}
+                                </p>
+                            )}
+                        </div>
                     </div>
 
                     {/* Excerpt */}
