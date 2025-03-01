@@ -2,7 +2,6 @@
 
 import QuantityControl from '@/app/(app)/product/_components/quantity-control'
 import { SelectScrollable } from '@/app/(app)/product/_components/select-scrollable'
-import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { IProductDoc } from '@/models/product-model'
 import { DollarSign, Minus } from 'lucide-react'
@@ -87,7 +86,6 @@ const SingleProduct: FC<SingleProductProps> = ({ product }) => {
                                 quantity={quantity}
                             />
                         )}
-                        <Button variant='secondary'>Buy Now</Button>
                     </div>
                     <Separator />
                     {/* category */}
