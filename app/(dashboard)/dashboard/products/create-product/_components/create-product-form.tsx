@@ -372,7 +372,6 @@ export default function CreateProductForm() {
                         <Editor
                             model={formData.description}
                             onModelChange={handleDescriptionChange}
-                            storageKey='product-description'
                         />
 
                         {errors.description && (
@@ -389,7 +388,6 @@ export default function CreateProductForm() {
                         <Editor
                             model={formData.content}
                             onModelChange={handleContentChange}
-                            storageKey='product-content'
                         />
                         {errors.content && (
                             <p className='text-sm text-red-500'>
